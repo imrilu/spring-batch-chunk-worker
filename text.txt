@@ -1,0 +1,42 @@
+[
+{"firstName": "Imri",
+"lastName": "Lussattov",
+"id": 1,
+"age": 28
+},
+{"firstName": "I'vri",
+"lastName": "Lider",
+"id": 2,
+"age": 35
+},
+{"firstName": "Yossi",
+"lastName": "Melamed",
+"id": 3,
+"age": 40
+},
+{"firstName": "Ric'hard",
+"lastName": "Gear",
+"id": 4,
+"age": 55
+},
+{"firstName": "Yehuda",
+"lastName": "Vaknin",
+"id": 5,
+"age": 24
+},
+{"firstName": "David",
+"lastName": "Melamed",
+"id": 6,
+"age": 77
+},
+{"firstName": "Timi",
+"lastName": "Lussattov",
+"id": 7,
+"age": 2
+},
+{"firstName": "Ziv",
+"lastName": "Cohen",
+"id": 8,
+"age": 33
+}
+]
