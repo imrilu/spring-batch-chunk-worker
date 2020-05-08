@@ -1,27 +1,26 @@
 package zoominfo.hw;
 
 import zoominfo.hw.model.Document;
-import zoominfo.hw.model.DocumentFactory;
+import zoominfo.hw.model.FileUtils;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemReader;
 
-public class DocumentReader implements ItemReader<Document>, StepExecutionListener {
+public class DocReader implements ItemReader<Document>, StepExecutionListener {
 
-    private DocumentFactory df;
+    private FileUtils df;
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        df = new DocumentFactory("text.txt");
+        df = new FileUtils("text.txt");
         System.out.println("Document Reader initialized.");
     }
 
     @Override
     public Document read() throws Exception {
         Document doc = df.readDocument();
-        if (doc != null) System.out.println("Read doc: [firstname: " + doc.getFirstName() +
-                " , lastname: " + doc.getLastName() + ", id: " + doc.getId());
+        if (doc != null) System.out.println("Read doc: " + doc.toString());
         return doc;
     }
 

@@ -1,6 +1,5 @@
 package zoominfo.hw.model;
 
-
 import java.io.Serializable;
 
 public class Document implements Serializable {
@@ -31,6 +30,9 @@ public class Document implements Serializable {
     public void setAge(int age) { this.age = age; }
 
     public String toString() {
-        return firstName;
+        return  "{\"id\":\"" + id + "\", " +
+                "\"firstName\":\"" + firstName + "\", " +
+                "\"lastName\":\"" + lastName + "\", " +
+                "\"age\":" + age + "}";
     }
 }

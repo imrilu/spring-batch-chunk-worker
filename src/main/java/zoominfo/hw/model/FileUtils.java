@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class DocumentFactory {
+public class FileUtils {
 
     private String fileName;
     private File file;
@@ -18,7 +18,7 @@ public class DocumentFactory {
     private JsonFactory jfactory;
     private JsonParser jParser;
 
-    public DocumentFactory(String fileName) {
+    public FileUtils(String fileName) {
         try {
             this.fileName = fileName;
         } catch (Exception e) {
@@ -34,21 +34,22 @@ public class DocumentFactory {
             if (jParser.nextToken() != JsonToken.START_OBJECT) {
                 return null;
             }
-
             Document document = new Document();
-
-            // Iterate over the properties of the object
             while (jParser.nextToken() != JsonToken.END_OBJECT) {
-
                 String property = jParser.getCurrentName();
                 jParser.nextToken();
-
                 switch (property) {
                     case "id":
                         document.setId(jParser.getText());
                         break;
                     case "firstName":
                         document.setFirstName(jParser.getText());
+                        break;
+                    case "lastName":
+                        document.setLastName(jParser.getText());
+                        break;
+                    case "age":
+                        document.setAge(jParser.getIntValue());
                         break;
                     // Unknown properties are ignored
                 }

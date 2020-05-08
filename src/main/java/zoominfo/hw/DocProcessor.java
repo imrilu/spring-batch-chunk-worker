@@ -7,8 +7,7 @@ import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemProcessor;
 
 
-public class DocumentsProcessor implements ItemProcessor<Document, String>, StepExecutionListener {
-
+public class DocProcessor implements ItemProcessor<Document, String>, StepExecutionListener {
 
     @Override
     public void beforeStep(StepExecution stepExecution) {

@@ -18,14 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import zoominfo.hw.DocumentReader;
-import zoominfo.hw.DocumentsProcessor;
+import zoominfo.hw.DocReader;
+import zoominfo.hw.DocProcessor;
+import zoominfo.hw.DocsWriter;
 import zoominfo.hw.model.Document;
-import zoominfo.hw.resultWriter;
 
 @Configuration
 @EnableBatchProcessing
-public class ChunksConfig {
+public class Config {
+
+    final private int CHUNK_SIZE = 50;
 
     @Autowired private JobBuilderFactory jobs;
 
@@ -59,22 +61,22 @@ public class ChunksConfig {
 
     @Bean
     public ItemReader<Document> itemReader() {
-        return new DocumentReader();
+        return new DocReader();
     }
 
     @Bean
     public ItemProcessor<Document, String> itemProcessor() {
-        return new DocumentsProcessor();
+        return new DocProcessor();
     }
 
     @Bean
     public ItemWriter<String> itemWriter() {
-        return new resultWriter();
+        return new DocsWriter();
     }
 
     @Bean
     protected Step processDocs(ItemReader<Document> reader, ItemProcessor<Document, String> processor, ItemWriter<String> writer) {
-        return steps.get("processDocs").<Document, String> chunk(2)
+        return steps.get("processDocs").<Document, String> chunk(CHUNK_SIZE)
           .reader(reader)
           .processor(processor)
           .writer(writer)

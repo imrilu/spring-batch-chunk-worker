@@ -1,6 +1,6 @@
 package zoominfo.hw;
 
-import zoominfo.hw.model.DocumentFactory;
+import zoominfo.hw.model.FileUtils;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
@@ -8,13 +8,13 @@ import org.springframework.batch.item.ItemWriter;
 
 import java.util.List;
 
-public class resultWriter implements ItemWriter<String>, StepExecutionListener {
+public class DocsWriter implements ItemWriter<String>, StepExecutionListener {
 
-    private DocumentFactory df;
+    private FileUtils df;
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        df = new DocumentFactory("output.txt");
+        df = new FileUtils("output.txt");
         System.out.println("Result Writer initialized.");
     }
 
