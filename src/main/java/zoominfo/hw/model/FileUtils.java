@@ -3,12 +3,14 @@ package zoominfo.hw.model;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Util class for reading the Document objects and writing the results
+ */
 public class FileUtils {
 
     private String fileName;
@@ -22,17 +24,17 @@ public class FileUtils {
         try {
             this.fileName = fileName;
         } catch (Exception e) {
-            System.err.println("Error while creating JSON parser for file: " + this.fileName);
+            System.err.println("Error while creating FileUtils object for file: " + fileName);
         }
     }
 
     public Document readDocument() {
         try {
             if (jParser == null) initReader();
-
             // Check the token
-            if (jParser.nextToken() != JsonToken.START_OBJECT) {
-                return null;
+            while (jParser.currentToken() != JsonToken.START_OBJECT) {
+                if (jParser.currentToken() == null) return null;
+                jParser.nextToken();
             }
             Document document = new Document();
             while (jParser.nextToken() != JsonToken.END_OBJECT) {

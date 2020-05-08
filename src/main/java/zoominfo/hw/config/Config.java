@@ -13,13 +13,12 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
-import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import zoominfo.hw.DocReader;
 import zoominfo.hw.DocProcessor;
+import zoominfo.hw.DocReader;
 import zoominfo.hw.DocsWriter;
 import zoominfo.hw.model.Document;
 
@@ -33,17 +32,11 @@ public class Config {
 
     @Autowired private StepBuilderFactory steps;
 
-
-    @Bean
-    public JobLauncherTestUtils jobLauncherTestUtils() {
-        return new JobLauncherTestUtils();
-    }
-
     @Bean
     public JobRepository jobRepository() throws Exception {
         MapJobRepositoryFactoryBean factory = new MapJobRepositoryFactoryBean();
         factory.setTransactionManager(transactionManager());
-        return (JobRepository) factory.getObject();
+        return factory.getObject();
     }
 
     @Bean
@@ -57,7 +50,6 @@ public class Config {
     public PlatformTransactionManager transactionManager() {
         return new ResourcelessTransactionManager();
     }
-
 
     @Bean
     public ItemReader<Document> itemReader() {
@@ -90,5 +82,4 @@ public class Config {
           .start(processDocs(itemReader(), itemProcessor(), itemWriter()))
           .build();
     }
-
 }

@@ -6,7 +6,9 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemProcessor;
 
-
+/**
+ * Class for processing each document and search for apostrophe in name
+ */
 public class DocProcessor implements ItemProcessor<Document, String>, StepExecutionListener {
 
     @Override

@@ -7,6 +7,9 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemReader;
 
+/**
+ * Class for reading the document objects from a file
+ */
 public class DocReader implements ItemReader<Document>, StepExecutionListener {
 
     private FileUtils df;

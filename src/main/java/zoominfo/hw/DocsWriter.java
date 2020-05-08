@@ -8,6 +8,9 @@ import org.springframework.batch.item.ItemWriter;
 
 import java.util.List;
 
+/**
+ * Class for writing a result batch to a file
+ */
 public class DocsWriter implements ItemWriter<String>, StepExecutionListener {
 
     private FileUtils df;
